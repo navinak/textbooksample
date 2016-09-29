@@ -6,6 +6,7 @@ var User=mongoose.model('User');
 
 
 
+
 exports.create = function(req, res){
     res.render('user-form', {
         title: 'Create user',
@@ -30,8 +31,11 @@ exports.doCreate = function(req, res){
         }else{
             // Success
             console.log("User created and saved: " + user);
+            req.session.user = { "name" : String, "email": String, "_id":
+            String };
             req.session.user = { "name" : user.name, "email": user.email, "_id":
             user._id };
+            /*req.session.loggedIn= Boolean;*/
             req.session.loggedIn = true;
             res.redirect( '/user' );
         }
@@ -48,7 +52,13 @@ exports.index = function (req, res) {
             email: req.session.user.email,
             userID: req.session.user._id
         })
-    }else{
+    }{
         res.redirect('/login');
     }
-}
+};
+
+// GET login page
+exports.login = function (req, res) {
+    res.render('login-form', {title: 'Log in'})
+};
+

@@ -9,9 +9,15 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var user=require('./routes/user');
 var project=require('./routes/project');
+var session=require('express-session');
+
+
 
 
 var app = express();
+
+
+
 
 
 // view engine setup
@@ -28,6 +34,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', routes);
 app.use('/users', users);
+
+
+
+
+
+
+app.use(session({secret: 'ssshhhhh'}));
+
+app.get('/',function(req,res) {
+  sess = req.session;
+});
+
+
+
+
+
 
 
 app.get('/', routes);
@@ -47,10 +69,12 @@ app.get('/user/delete', user.confirmDelete); // delete current
 app.post('/user/delete', user.doDelete);
 // Delete current
 //user action
+*/
 app.get('/login', user.login);
 // Login form
 app.post('/login', user.doLogin);
 // Login action
+/*
 app.get('/logout', user.doLogout);
 // Logout current user*/
 
@@ -61,8 +85,8 @@ app.get('/logout', user.doLogout);
 /*app.get('/project/new', project.create);
 app.post('/project/new', project.doCreate);
 app.get('/project/:id', project.displayInfo); // Display project
-//info
-app.get('/project/edit/:id', project.edit);
+//info */
+/*app.get('/project/edit/:id', project.edit);
 // Edit selected
 //project form
 app.post('/project/edit/:id', project.doEdit);// Edit selected
