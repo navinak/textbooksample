@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', routes);
+app.use('/', routes);
 app.use('/users', users);
 
 
@@ -52,7 +52,7 @@ app.get('/',function(req,res) {
 
 
 
-app.get('/', routes);
+//app.get('/', routes);
 // USER ROUTES*/
 app.get('/user', user.index);
 
@@ -82,9 +82,9 @@ app.get('/logout', user.doLogout);
 
 
 
-/*app.get('/project/new', project.create);
+app.get('/project/new', project.create);
 app.post('/project/new', project.doCreate);
-app.get('/project/:id', project.displayInfo); // Display project
+/*app.get('/project/:id', project.displayInfo); // Display project
 //info */
 /*app.get('/project/edit/:id', project.edit);
 // Edit selected
@@ -96,6 +96,11 @@ app.get('/project/delete/:id', project.confirmDelete);// Delete
 app.post('/project/delete/:id', project.doDelete);
 // Delete
 //selected project action*/
+
+
+app.get('/project/byuser/:userid', project.byUser);
+// Projects
+//created by a user
 
 
 // catch 404 and forward to error handler

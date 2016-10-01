@@ -35,7 +35,7 @@ var userSchema = new mongoose.Schema({
     modifiedOn: Date,
     lastLogin: Date
 });
-mongoose.model( 'User', userSchema );
+
 
 var projectSchema = new mongoose.Schema({
     projectName: String,
@@ -46,5 +46,15 @@ var projectSchema = new mongoose.Schema({
     tasks: String
 });
 
+projectSchema.statics.findByUserID = function (userid, callback) {
+    this.find(
+        { createdBy: userid },
+        '_id projectName',
+        {sort: 'modifiedOn'},
+    callback
+    );
+};
+
+mongoose.model( 'User', userSchema );
 mongoose.model( 'Project', projectSchema );
 
