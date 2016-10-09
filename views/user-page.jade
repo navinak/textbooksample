@@ -16,8 +16,9 @@ block content
             li
                 a(href="/logout") Logout #{name}
 block headjs
-    script()
-        var userID = "#{_id}";
+    script(type='text/javascript').
+        console.log("Entered into script");
+        var userID = "#{userID}";
     script(src="/javascripts/user.js")
     h3 My projects
     ul#myprojects

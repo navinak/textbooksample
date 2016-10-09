@@ -69,3 +69,33 @@ exports.byUser = function (req, res) {
         res.json({"status":"error", "error":"No user id supplied"});
     }
 };
+
+
+// GET project info
+exports.displayInfo = function(req, res) {
+    console.log("Finding project _id: " + req.params.id);
+    if (req.session.loggedIn !== "true"){
+        res.redirect('/login');
+    }
+    else {
+        if (req.params.id) {
+            Project.findById( req.params.id, function(err,project) {
+                if(err){
+                    console.log(err);
+                    res.redirect('/user?404=project');
+                }else{
+                    console.log(project);
+                    res.render('project-page', {
+                        title: project.projectName,
+                        projectName: project.projectName,
+                        tasks: project.tasks,
+                        createdBy: project.createdBy,
+                        projectID: req.params.id
+                    });
+                }
+            });
+        }else{
+            res.redirect('/user');
+        }
+    }
+};

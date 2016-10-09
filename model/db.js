@@ -51,8 +51,7 @@ projectSchema.statics.findByUserID = function (userid, callback) {
         { createdBy: userid },
         '_id projectName',
         {sort: 'modifiedOn'},
-    callback
-    );
+        callback);
 };
 
 mongoose.model( 'User', userSchema );

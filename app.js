@@ -102,6 +102,9 @@ app.get('/project/byuser/:userid', project.byUser);
 // Projects
 //created by a user
 
+app.get('/project/:id', project.displayInfo);
+// Display project info
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

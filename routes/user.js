@@ -44,7 +44,7 @@ exports.doCreate = function(req, res){
     });
 };
 
-exports.index = function (req, res) {
+exports.index = function (req, res,next) {
     if(req.session.loggedIn === "true"){
         res.render('user-page', {
             title: req.session.user.name,
@@ -52,7 +52,7 @@ exports.index = function (req, res) {
             email: req.session.user.email,
             userID: req.session.user._id
         })
-    }{
+    }else{
         res.redirect('/login');
     }
 };
