@@ -1,0 +1,12 @@
+//
+   Created by navina on 9/10/16.
+
+extends layout
+block content
+    h1= title
+    form(id="frmUserProfile",method="post",action="/user/edit")
+        label(for="FullName") Full name
+        input(type="text", name="FullName", id="FullName",value="#{name}")
+        label(for="Email") Email
+        input(type="email", name="Email", id="Email",value="#{email}")
+        input(type="submit", value="#{buttonText}")

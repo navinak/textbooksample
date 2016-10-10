@@ -60,21 +60,19 @@ app.get('/user', user.index);
 app.get('/user/new', user.create);
 // Create new user form
 app.post('/user/new', user.doCreate); // Create new user action
-/*app.get('/user/edit', user.edit);
+app.get('/user/edit', user.edit);
 // Edit current user form
 app.post('/user/edit', user.doEdit);
 // Edit current user action
 app.get('/user/delete', user.confirmDelete); // delete current
 //user form
-app.post('/user/delete', user.doDelete);
-// Delete current
+app.post('/user/delete', user.doDelete);// Delete current
 //user action
-*/
 app.get('/login', user.login);
 // Login form
 app.post('/login', user.doLogin);
 // Login action
-/*
+
 app.get('/logout', user.doLogout);
 // Logout current user*/
 
@@ -84,12 +82,14 @@ app.get('/logout', user.doLogout);
 
 app.get('/project/new', project.create);
 app.post('/project/new', project.doCreate);
-/*app.get('/project/:id', project.displayInfo); // Display project
-//info */
-/*app.get('/project/edit/:id', project.edit);
+
+app.get('/project/edit/:id', project.edit);
 // Edit selected
 //project form
 app.post('/project/edit/:id', project.doEdit);// Edit selected
+
+
+/*
 //project action
 app.get('/project/delete/:id', project.confirmDelete);// Delete
 // selected product form

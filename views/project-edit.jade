@@ -1,0 +1,18 @@
+//
+   Created by navina on 10/10/16.
+//
+   Created by navina on 1/10/16.
+
+extends layout
+block content
+    h1= title
+    form(id="frmUserProfile",method="post",action="/project/edit/#{id}" )
+        label(for="ProjectName") Project name
+        input(type="text", name="ProjectName", id="ProjectName" ,value="#{projectName}")
+        label(for="contributors") contributors
+        input(type="text", name="contributors", id="contributors", value="#{contributors}")
+        label(for="task") task
+        input(type="text", name="task", id="task", value="#{tasks}")
+        input(type="submit", value="Save")
+
+

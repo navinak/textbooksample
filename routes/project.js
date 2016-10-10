@@ -90,6 +90,7 @@ exports.displayInfo = function(req, res) {
                         projectName: project.projectName,
                         tasks: project.tasks,
                         createdBy: project.createdBy,
+                        contributors:project.contributors,
                         projectID: req.params.id
                     });
                 }
@@ -97,5 +98,77 @@ exports.displayInfo = function(req, res) {
         }else{
             res.redirect('/user');
         }
+    }
+};
+
+
+// GET Project edit form
+exports.edit = function(req, res){
+    console.log("Finding project _id: " + req.params.id);
+    if (req.session.loggedIn !== "true"){
+        res.redirect('/login');
+    }else{
+        if (req.params.id) {
+            Project.findById( req.params.id, function(err,project) {
+                if(err){
+                    console.log(err);
+                    res.redirect('/user?404=project');
+                }else{
+                    console.log(project);
+                    res.render('project-edit', {
+                        id:req.params.id,
+                        title: project.projectName,
+                        projectName: project.projectName,
+                        tasks: project.tasks,
+                        createdBy: project.createdBy,
+                        contributors:project.contributors,
+                        projectID: req.params.id
+                    });
+                }
+            });
+        }else{
+            res.redirect('/user');
+        }
+    }
+};
+
+
+
+
+exports.doEdit = function(req, res) {
+    if (req.session.user._id) {
+        Project.findById( req.params.id,
+            function (err, project) {
+
+                doEditSave (req, res, err, project);
+            }
+        );
+    }
+};
+var doEditSave = function(req, res, err, project) {
+    if(err){
+        console.log(err);
+        res.redirect( '/user?error=finding');
+    } else {
+        console.log("elseloop"+req.body.ProjectName);
+        project.projectName = req.body.ProjectName;
+        project.contributors = req.body.contributors;
+        project.tasks = req.body.task;
+        project.save(
+            function (err, project) {
+                onEditSave (req, res, err, project);
+            }
+        );
+    }
+};
+var onEditSave = function (req, res, err, project) {
+    if(err){
+        console.log(err);
+        res.redirect( '/user?error=saving');
+    } else {
+        console.log('User updated: ' + req.body.FullName);
+        req.session.user.name = req.body.FullName;
+        req.session.user.email = req.body.Email;
+        res.redirect( '/project/'+project._id );
     }
 };
